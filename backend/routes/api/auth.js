@@ -4,6 +4,6 @@ const registrationController = require("../../controllers/registrationController
 const secureApi = require("../../middleware/secureApi")
 
 
-route.get("/registration",secureApi, registrationController);
+route.post("/registration", secureApi, registrationController);
 
 module.exports = route

@@ -4,6 +4,8 @@ const app = express();
 const router = require("./routes")
 const mongoConfig = require("./config/mongoConfig")
 
+app.use(express.json())
+
 mongoConfig()
 
 app.use("/", router);
