@@ -25,7 +25,7 @@ const registrationController = async (req, res) => {
       upperCaseAlphabets: false,
       specialChars: false,
     });
-    console.log(otp);
+
 
     bcrypt.hash(password, 10, async function(err, hash) {
         let user = new User({

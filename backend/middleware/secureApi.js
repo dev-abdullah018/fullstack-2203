@@ -5,6 +5,7 @@ let secureApi = (req,res,next)=>{
 
         next()
     }else{
+        res.status(401)
         res.send({error: "Invalid api"})
     }
 }

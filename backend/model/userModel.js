@@ -5,6 +5,10 @@ const userSchema = new Schema({
   name: String,
   email: String,
   password: String,
+  emailVerification:{
+   type: Boolean,
+   default: false,
+  },
   role:{
     type: String,
     enum: ["Admin", "Merchant", "User"],
