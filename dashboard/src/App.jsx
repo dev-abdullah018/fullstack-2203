@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { Button, Checkbox, Form, Input,Alert, Space } from 'antd';
-import axios from "axios"
 import {
   createRoutesFromElements,
   createBrowserRouter,
@@ -9,6 +7,7 @@ import {
 } from "react-router-dom";
 import Registration from '../pages/Registration';
 import OtpVerification from '../pages/OtpVerification';
+import Login from '../pages/Login';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +15,10 @@ const router = createBrowserRouter(
         <Route
           path="/"
           element={<Registration />}
+        />
+        <Route
+          path="/login"
+          element={<Login />}
         />
         <Route
           path="/otpverification/:email"
