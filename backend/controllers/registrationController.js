@@ -22,6 +22,7 @@ const registrationController = async (req, res) => {
     return res.send({ error: `${email} alrady in use ` });
   } else {
     let otp = otpGenerator.generate(6, {
+      lowerCaseAlphabets: false,
       upperCaseAlphabets: false,
       specialChars: false,
     });

@@ -5,7 +5,8 @@ const otpController = require("../../controllers/otpController")
 const secureApi = require("../../middleware/secureApi")
 
 
-route.post("/registration", secureApi, registrationController);
+// route.post("/registration", secureApi, registrationController);
+route.post("/registration", registrationController);
 route.post("/otpVerification", otpController);
 
 module.exports = route

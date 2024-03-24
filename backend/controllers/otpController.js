@@ -6,11 +6,11 @@ let otpController = async(req,res) =>{
 
     console.log(findUser.otp);
 
-    if(findUser.emailVerification && findUser.otp == otp){
-        await User.findOneAndUpdate({email:email}, {otp: ""})
-        res.send("milse")
+    if(!findUser.emailVerified && findUser.otp == otp){
+        await User.findOneAndUpdate({email:email}, {otp: "", emailVerified: true})
+        res.send("Milse")
     }else{
-        res.send("mile nai");
+        res.send("Mile nai");
     }
 }
 

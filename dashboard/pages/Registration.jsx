@@ -9,7 +9,7 @@ const Registration = () => {
   let navigate = useNavigate()
 
 
-const onFinish = async(values) => {
+const onFinish = async (values) => {
   console.log('Success:', values);
    setLoading(true)  
 
@@ -17,17 +17,19 @@ const onFinish = async(values) => {
      name: values.username,
      email: values.email,
      password: values.password
-  },{
-    headers: {
-      Authorization : "9&hH;5D139,"
-    }
-  })
+  },
+  // {
+  //   headers: {
+  //     Authorization : "9&hH;5D139,"
+  //   }
+  // }
+  )
 
   console.log(data)
   setLoading(false)
   setMsg("Registration Successfull. Please check your email!")
   setTimeout(()=>{
-    navigate("/otpverification")
+    navigate(`/otpverification/${values.email}`)
   },1500)
 };
 const onFinishFailed = (errorInfo) => {
