@@ -8,6 +8,8 @@ import {
 import Registration from '../pages/Registration';
 import OtpVerification from '../pages/OtpVerification';
 import Login from '../pages/Login';
+import EmailVerifyLink from '../pages/EmailVerifyLink';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,6 +21,10 @@ const router = createBrowserRouter(
         <Route
           path="/login"
           element={<Login />}
+        />
+        <Route
+          path="/emailverification/:token"
+          element={<EmailVerifyLink />}
         />
         <Route
           path="/otpverification/:email"

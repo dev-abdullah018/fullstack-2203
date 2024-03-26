@@ -28,9 +28,9 @@ const onFinish = async (values) => {
   console.log(data)
   setLoading(false)
   setMsg("Registration Successfull. Please check your email!")
-  setTimeout(()=>{
-    navigate(`/otpverification/${values.email}`)
-  },1500)
+  // setTimeout(()=>{
+  //   navigate(`/otpverification/${values.email}`)
+  // },1500)
 };
 const onFinishFailed = (errorInfo) => {
   console.log('Failed:', errorInfo);
