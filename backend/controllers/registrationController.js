@@ -68,7 +68,7 @@ const registrationController = async (req, res) => {
           from: `'MERNIAN'`, // sender address
           to: email, // list of receivers
           subject: "This is Your Verification", // Subject line
-          html: `<a href="http://localhost:5173/emailverification/${token}">Click here</a>`
+          html: `<a href="http://localhost:5173/emailverification/${token}" style="display: inline-block; background-color: #1890ff; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Click here</a>`
         });
       });
 

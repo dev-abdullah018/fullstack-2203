@@ -30,7 +30,9 @@ const resendEmailController = async (req, res) => {
         from: `'MERNIAN'`,
         to: email,
         subject: "Email Verification",
-        html: `<a href="http://localhost:5173/emailverification/${token}">Click here to verify your email</a>`
+        html: `<a href="http://localhost:5173/emailverification/${token}" style="display: inline-block; background-color: #1890ff; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">
+        Click here to verify your email
+            </a>`
       });
   
       res.status(200).json({
