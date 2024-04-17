@@ -29,6 +29,7 @@ const ResendEmailModal = ({ visible, onCancel }) => {
     <Modal
       open={visible}
       onCancel={onCancel}
+      closable={false}
       footer={[
         <Button key="cancel" onClick={onCancel}>
           Cancel

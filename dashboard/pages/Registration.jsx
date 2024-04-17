@@ -7,6 +7,7 @@ const Registration = () => {
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [email, setEmail] = useState("");
+  const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     setLoading(true);
@@ -20,6 +21,7 @@ const Registration = () => {
         }
       );
       message.success(response.data.message);
+      form.resetFields();
       setEmail(values.email); // Store email for ResendEmailModal
     } catch (error) {
       message.error(error.response.data.error);
@@ -42,6 +44,7 @@ const Registration = () => {
   return (
     <>
       <Form
+        form={form}
         name="basic"
         labelCol={{ span: 8 }}
         wrapperCol={{ span: 16 }}
@@ -86,7 +89,7 @@ const Registration = () => {
           >
             Submit
           </Button>
-          <Button type="primary" onClick={handleResendModalOpen}>
+          <Button type="primary" style={{ marginLeft: '30px' }} onClick={handleResendModalOpen}>
             Resend
           </Button>
         </Form.Item>
