@@ -9,6 +9,8 @@ import Registration from '../pages/Registration';
 import OtpVerification from '../pages/OtpVerification';
 import Login from '../pages/Login';
 import EmailVerifyLink from '../pages/EmailVerifyLink';
+import Forgotpass from '../pages/Forgotpass';
+import NewPassword from '../pages/NewPassword';
 
 
 const router = createBrowserRouter(
@@ -21,6 +23,14 @@ const router = createBrowserRouter(
         <Route
           path="/login"
           element={<Login />}
+        />
+        <Route
+          path="/forgotpass"
+          element={<Forgotpass />}
+        />
+        <Route
+          path="/newpass/:token"
+          element={<NewPassword />}
         />
         <Route
           path="/emailverification/:token"

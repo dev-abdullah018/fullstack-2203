@@ -5,6 +5,7 @@ import axios from "axios"
 const Login = () => {
     let [loading, setLoading] = useState(false)
     let [msg, setMsg] = useState()
+    const [form] = Form.useForm();
   
   const onFinish = async (values) => {
     console.log('Success:', values);
@@ -17,8 +18,9 @@ const Login = () => {
     )
   
     console.log(data)
-
     setMsg(data.data.success)
+    setLoading(false)
+    form.resetFields();
   };
   const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -29,6 +31,7 @@ const Login = () => {
     {msg && <Alert message={msg} type="success" showIcon closable />}
 
   <Form
+  form={form}
   name="basic"
   labelCol={{
     span: 8,

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import axios from "axios";
-import ResendEmail from "../components/ResendEmail";
+import ResendEmail from "./ResendEmail";
+import { Link } from "react-router-dom";
 
 const Registration = () => {
   const [loading, setLoading] = useState(false);
@@ -31,6 +32,10 @@ const Registration = () => {
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
+  };
+
+  const onReset = () => {
+    form.resetFields();
   };
 
   const handleResendModalOpen = () => {
@@ -89,9 +94,13 @@ const Registration = () => {
           >
             Submit
           </Button>
-          <Button type="primary" style={{ marginLeft: '30px' }} onClick={handleResendModalOpen}>
+          <Button type="primary" style={{ marginLeft: '10px' }} onClick={onReset}>
+            Reset
+          </Button>
+          <Button htmlType="button" style={{ marginLeft: '10px' }} onClick={handleResendModalOpen}>
             Resend
           </Button>
+           <Link to="/forgotpass" style={{ marginLeft: '10px' }}>Forgotpass</Link>
         </Form.Item>
       </Form>
       <ResendEmail

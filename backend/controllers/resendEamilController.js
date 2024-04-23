@@ -34,7 +34,7 @@ const resendEmailController = async (req, res) => {
         Click here to verify your email
             </a>`
       });
-  
+       
       res.status(200).json({
         message: "Email verification link resent successfully."
       });

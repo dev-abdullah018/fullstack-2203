@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Button, Form, Input, message } from 'antd';
 import axios from "axios";
 
-const ResendEmailModal = ({ visible, onCancel }) => {
+const ResendEmail = ({ visible, onCancel }) => {
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
 
@@ -52,4 +52,4 @@ const ResendEmailModal = ({ visible, onCancel }) => {
   );
 };
 
-export default ResendEmailModal;
+export default ResendEmail;
