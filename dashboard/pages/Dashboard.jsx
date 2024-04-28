@@ -26,9 +26,9 @@ const Dashboard = () => {
     ]),
     getItem('Category', 'sub3', <SettingOutlined />, [
       getItem('Add Category', '/dashboard/addcategory'),
-      getItem('View Category', '6'),
-      getItem('Add SubCategory', '7'),
-      getItem('View SubCategory', '8'),
+      getItem('View Category', '/dashboard/viewcategory'),
+      getItem('Add SubCategory', '/dashboard/addsubcategory'),
+      getItem('View SubCategory', '/dashboard/viewsubcategory'),
     ]),
     getItem('Discount', 'sub4', <TagsOutlined />, [
       getItem('Add Discount', '9'),

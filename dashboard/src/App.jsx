@@ -14,6 +14,9 @@ import Forgotpass from "../pages/Forgotpass";
 import NewPassword from "../pages/NewPassword";
 import Dashboard from "../pages/Dashboard";
 import AddCategory from "../pages/AddCategory";
+import AddSubCategory from "../pages/AddSubCategory";
+import ViewCategory from "../pages/ViewCategory";
+import ViewSubCategory from "../pages/ViewSubCategory";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,6 +29,9 @@ const router = createBrowserRouter(
       <Route path="/otpverification/:email" element={<OtpVerification />} />
       <Route path="/dashboard" element={<Dashboard />}>
         <Route path="addcategory" element={<AddCategory />} />
+        <Route path="addsubcategory" element={<AddSubCategory />} />
+        <Route path="viewcategory" element={<ViewCategory />} />
+        <Route path="viewsubcategory" element={<ViewSubCategory />} />
       </Route>
     </Route>
   )
