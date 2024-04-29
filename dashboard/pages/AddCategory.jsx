@@ -1,9 +1,11 @@
 import React from 'react'
 import { Button, Form, Input } from 'antd';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 
 const AddCategory = () => {
+  let userInfo = useSelector(state => state.user.value)
     const onFinish = async (values) => {
         console.log('Success:', values);
         let data =  await axios.post("http://localhost:8000/api/v1/product/createcategory",{
@@ -17,7 +19,7 @@ const AddCategory = () => {
       };
 
   return (
-    <>
+    userInfo.role != "User" &&
     <Form
     name="basic"
     labelCol={{
@@ -60,7 +62,6 @@ const AddCategory = () => {
       </Button>
     </Form.Item>
   </Form>
-    </>
   )
 }
 

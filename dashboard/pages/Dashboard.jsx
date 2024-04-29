@@ -1,7 +1,8 @@
 import React from 'react'
-import { AppstoreOutlined, MailOutlined, SettingOutlined, TagsOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, MailOutlined, SettingOutlined, TagsOutlined, UserOutlined } from '@ant-design/icons';
 import { Menu, Col, Row } from 'antd';
 import { Outlet,useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Dashboard = () => {
   let navigate = useNavigate();
@@ -15,24 +16,38 @@ const Dashboard = () => {
       type,
     };
   }
+ 
+  let userInfo = useSelector(state => state.user.value)
+     console.log(userInfo.role);
+
   const items = [
-    getItem('Users', 'sub1', <MailOutlined />, [
-      getItem('Add User', '1'),
-      getItem('View User', '2'),
-    ]),
-    getItem('Product', 'sub2', <AppstoreOutlined />, [
-      getItem('Add Product', '3'),
-      getItem('View Product', '4'),
-    ]),
-    getItem('Category', 'sub3', <SettingOutlined />, [
-      getItem('Add Category', '/dashboard/addcategory'),
-      getItem('View Category', '/dashboard/viewcategory'),
-      getItem('Add SubCategory', '/dashboard/addsubcategory'),
-      getItem('View SubCategory', '/dashboard/viewsubcategory'),
-    ]),
-    getItem('Discount', 'sub4', <TagsOutlined />, [
-      getItem('Add Discount', '9'),
-      getItem('View Discount', '10'),
+    userInfo.role != "User" &&
+      getItem('Users', 'sub1', <MailOutlined />, [
+        getItem('Add User', '1'),
+        getItem('View User', '2'),
+      ]),
+      userInfo.role != "User" &&
+      getItem('Product', 'sub2', <AppstoreOutlined />, [
+        getItem('Add Product', '3'),
+        getItem('View Product', '4'),
+      ]),
+      userInfo.role != "User" &&
+      getItem('Category', 'sub3', <SettingOutlined />, [
+        getItem('Add Category', '/dashboard/addcategory'),
+        getItem('View Category', '/dashboard/viewcategory'),
+        getItem('Add SubCategory', '/dashboard/addsubcategory'),
+        getItem('View SubCategory', '/dashboard/viewsubcategory'),
+      ]),
+      userInfo.role != "User" &&
+      getItem('Discount', 'sub4', <TagsOutlined />, [
+        getItem('Add Discount', '9'),
+        getItem('View Discount', '10'),
+      ]),
+
+    userInfo.role == "User" &&
+    getItem('My Profile', 'sub5', <UserOutlined />, [
+      getItem('Purchase', '11'),
+      getItem('Profile', '12'),
     ]),
   ];
 

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Form, Input,  Select, Space } from 'antd';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 
 const AddSubCategory = () => {
    let  [catList, setCatList] = useState([])
    let [catId,setCatId] = useState("")
+   let userInfo = useSelector(state => state.user.value)
 
     const onFinish = async (values) => {
         console.log('Success:', values);
@@ -44,7 +46,7 @@ const AddSubCategory = () => {
       }
 
   return (
-    <>
+    userInfo.role != "User" &&
     <Form
     name="basic"
     labelCol={{
@@ -96,7 +98,6 @@ const AddSubCategory = () => {
       </Button>
     </Form.Item>
   </Form>
-    </>
   )
 }
 

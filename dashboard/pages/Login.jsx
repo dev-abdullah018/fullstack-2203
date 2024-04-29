@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Button, Form, Input,Alert, Space } from 'antd';
-import axios from "axios"
+import axios from "axios";
+import {useDispatch} from "react-redux";
+import { activeUser } from '../src/slices/userSlice';
+
 
 const Login = () => {
     let [loading, setLoading] = useState(false)
     let [msg, setMsg] = useState()
     const [form] = Form.useForm();
+
+    const dispatch = useDispatch()
   
   const onFinish = async (values) => {
     console.log('Success:', values);
@@ -18,6 +23,8 @@ const Login = () => {
     )
   
     console.log(data)
+    dispatch(activeUser(data.data))
+    localStorage.setItem("user" , JSON.stringify(data.data))
     setMsg(data.data.success)
     setLoading(false)
     form.resetFields();

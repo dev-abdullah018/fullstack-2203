@@ -1,9 +1,11 @@
 import { Table } from 'antd';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux';
 
 const ViewSubCategory = () => {
     let  [catList, setCatList] = useState([])
+    let userInfo = useSelector(state => state.user.value)
 
     useEffect(()=>{
         async function allsubcat(){
@@ -43,6 +45,7 @@ const ViewSubCategory = () => {
         },
       ];
   return (
+    userInfo.role != "User" &&
     <Table dataSource={catList} columns={columns} />
   )
 }
