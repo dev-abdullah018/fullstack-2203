@@ -28,8 +28,8 @@ const Dashboard = () => {
       ]),
       userInfo.role != "User" &&
       getItem('Product', 'sub2', <AppstoreOutlined />, [
-        getItem('Add Product', '3'),
-        getItem('View Product', '4'),
+        getItem('Add Product', '/dashboard/addproduct'),
+        getItem('View Product', '/dashboard/viewproduct'),
       ]),
       userInfo.role != "User" &&
       getItem('Category', 'sub3', <SettingOutlined />, [
