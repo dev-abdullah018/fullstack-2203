@@ -1,13 +1,14 @@
 const Product = require("../model/productModel")
 
 const productController = async (req, res) => {
-  const { name } = req.body;
+  const { name,description } = req.body;
 
 
   console.log(req);
 
     let product = new Product({
         name: name,
+        description: description,
         image: `/uploads/${req.file.filename}`,
     })
    product.save()
