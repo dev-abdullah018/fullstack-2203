@@ -189,3 +189,221 @@
 // };
 
 // export default Registration;
+
+
+
+
+
+import { Table, Tag, Button, Modal, Form, Input } from "antd";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+
+const ViewCategory = () => {
+  const [catList, setCatList] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingCategory, setEditingCategory] = useState(null);
+  const [form] = Form.useForm();
+  let userInfo = useSelector((state) => state.user.value);
+
+  const showModal = (record) => {
+    setEditingCategory(record);
+    form.setFieldsValue({ name: record.name });
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const onFinish = async (values) => {
+    try {
+      const response = await axios.post("http://localhost:8000/api/v1/product/editcat", {
+        id: editingCategory.key,
+        name: values.name,
+      });
+      console.log(response);
+      // Update the category list after editing
+      const updatedCatList = catList.map((cat) =>
+        cat.key === editingCategory.key ? { ...cat, name: values.name } : cat
+      );
+      setCatList(updatedCatList);
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error("Failed to update category:", error);
+    }
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
+
+  useEffect(() => {
+    async function fetchCategories() {
+      try {
+        const { data } = await axios.get("http://localhost:8000/api/v1/product/allcat");
+        const formattedData = data.map((item) => ({
+          key: item._id,
+          name: item.name,
+          status: item.status,
+        }));
+        setCatList(formattedData);
+      } catch (error) {
+        console.error("Failed to fetch categories:", error);
+      }
+    }
+    fetchCategories();
+  }, []);
+
+  const handleClick = async (record) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/product/approvecategory",
+        {
+          id: record.key,
+          status: record.status === "waiting" ? "approve" : "reject",
+        }
+      );
+      console.log(response);
+      // Update the category status in the UI
+      const updatedCatList = catList.map((cat) =>
+        cat.key === record.key ? { ...cat, status: response.data.status } : cat
+      );
+      setCatList(updatedCatList);
+    } catch (error) {
+      console.error("Failed to approve/reject category:", error);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:8000/api/v1/product/deletecategory/${id}`
+      );
+      console.log(response);
+      // Remove the category from the list
+      setCatList(catList.filter((cat) => cat.key !== id));
+    } catch (error) {
+      console.error("Failed to delete category:", error);
+    }
+  };
+
+  const columns = [
+    {
+      title: "Category Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (status) => (
+        <Tag
+          color={
+            status === "waiting"
+              ? "orange"
+              : status === "approve"
+              ? "green"
+              : "red"
+          }
+        >
+          {status.toUpperCase()}
+        </Tag>
+      ),
+    },
+    {
+      title: "Action",
+      dataIndex: "action",
+      key: "action",
+      render: (_, record) => (
+        <>
+          <Button
+            onClick={() => handleClick(record)}
+            style={{
+              backgroundColor: record.status === "waiting" ? "#52c41a" : "#fb6944",
+              borderColor: record.status === "waiting" ? "#52c41a" : "#fb6944",
+              color: "#000",
+              fontWeight: "bold",
+            }}
+          >
+            {record.status === "waiting" ? "Approve" : "Reject"}
+          </Button>
+          <Button
+            onClick={() => handleDelete(record.key)}
+            style={{
+              marginLeft: "10px",
+              backgroundColor: "#d14249",
+              borderColor: "#d14249",
+              color: "#000",
+              fontWeight: "bold",
+            }}
+          >
+            Delete
+          </Button>
+          <Button
+            type="primary"
+            onClick={() => showModal(record)}
+            style={{
+              marginLeft: "10px",
+              color: "white",
+              fontWeight: "bold",
+            }}
+          >
+            Edit
+          </Button>
+        </>
+      ),
+    },
+  ];
+
+  return (
+    userInfo.role !== "User" && (
+      <>
+        <Table dataSource={catList} columns={columns} />
+        <Modal
+          title="Edit Category"
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={null}
+        >
+          <Form
+            form={form}
+            name="edit_category"
+            labelCol={{ span: 8 }}
+            wrapperCol={{ span: 16 }}
+            initialValues={editingCategory ? { name: editingCategory.name } : {}}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="Name"
+              name="name"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input the category name!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+              <Button type="primary" htmlType="submit">
+                Change
+              </Button>
+            </Form.Item>
+          </Form>
+        </Modal>
+      </>
+    )
+  );
+};
+
+export default ViewCategory;

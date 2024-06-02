@@ -20,7 +20,7 @@ const ViewProduct = () => {
               if (oembedMatch) {
                 const oembedUrl = oembedMatch[0].match(/url="([^"]*)"/)[1];
                 oembedUrl.replace("watch", "embed")
-                const iframeElement = `<iframe width="300" height="315" src="https://www.youtube.com/embed/${oembedUrl.split("v=")[1].split("&")[0]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+                const iframeElement = `<iframe width="200" height="215" src="https://www.youtube.com/embed/${oembedUrl.split("v=")[1].split("&")[0]}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
                 details = details.replace(oembedRegex, iframeElement);
               }
                 catdata.push({

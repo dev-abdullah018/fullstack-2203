@@ -23,11 +23,23 @@ const verifyToken = require("../../middleware/verifyToken");
 const secureApi = require("../../middleware/secureApi");
 const productController = require("../../controllers/productController");
 const viewProductController = require("../../controllers/viewProductController");
+const approveCategoryController = require("../../controllers/approveCategoryController");
+const approveSubCategoryController = require("../../controllers/approveSubCategoryController");
+const deleteCategoryController = require("../../controllers/deleteCategoryController");
+const deleteSubCategoryController = require("../../controllers/deleteSubCategoryController");
+const editCategoryController = require("../../controllers/editCategoryController");
+const editSubCategoryController = require("../../controllers/editSubCategoryController");
 
 
 route.post("/createcategory", secureApi , verifyToken , addCategoryController);
+route.post("/approvecategory", approveCategoryController);
 route.post("/createsubcategory", addSubCategoryController);
+route.post("/approvesubcategory", approveSubCategoryController);
 route.post("/createproduct", upload.single('avatar') , productController);
+route.post("/editcat", editCategoryController);
+route.post("/editsubcat", editSubCategoryController);
+route.delete("/deletecategory/:id", deleteCategoryController);
+route.delete("/deletesubcategory/:id", deleteSubCategoryController);
 
 
 route.get("/allcat", viewCategoryController);
