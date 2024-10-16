@@ -59,7 +59,7 @@ const Dashboard = () => {
   return (
     <>
     <Row>
-      <Col span={7}>
+      <Col span={5}>
       <Menu
       onClick={onClick}
       style={{
@@ -71,7 +71,7 @@ const Dashboard = () => {
       items={items}
     />
       </Col>
-      <Col span={17}>
+      <Col span={19}>
          <Outlet/>
       </Col>
     </Row>

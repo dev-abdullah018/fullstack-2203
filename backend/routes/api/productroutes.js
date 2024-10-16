@@ -29,6 +29,8 @@ const deleteCategoryController = require("../../controllers/deleteCategoryContro
 const deleteSubCategoryController = require("../../controllers/deleteSubCategoryController");
 const editCategoryController = require("../../controllers/editCategoryController");
 const editSubCategoryController = require("../../controllers/editSubCategoryController");
+const editProductController = require("../../controllers/editProductController");
+const deleteProductController = require("../../controllers/deleteProductController");
 
 
 route.post("/createcategory", secureApi , verifyToken , addCategoryController);
@@ -36,8 +38,10 @@ route.post("/approvecategory", approveCategoryController);
 route.post("/createsubcategory", addSubCategoryController);
 route.post("/approvesubcategory", approveSubCategoryController);
 route.post("/createproduct", upload.single('avatar') , productController);
+route.post('/editproduct/:id', upload.single('image'), editProductController);
 route.post("/editcat", editCategoryController);
 route.post("/editsubcat", editSubCategoryController);
+route.delete('/deleteproduct/:id', deleteProductController);
 route.delete("/deletecategory/:id", deleteCategoryController);
 route.delete("/deletesubcategory/:id", deleteSubCategoryController);
 

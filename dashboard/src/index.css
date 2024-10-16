@@ -1,0 +1,7 @@
+.centered-column {
+    text-align: center; /* Center the column title */
+  }
+  
+  .centered-content {
+    text-align: center; /* Center the content inside the table cell */
+  }
